@@ -1,0 +1,138 @@
+package com.yuntools.entity;
+
+/**
+ * baidu ocr接口请求入参
+ * @author mantous
+ */
+public class BaiDuWords {
+
+	/**
+	 * 图像数据，base64编码后进行urlencode，要求base64编码和urlencode后大小不超过4M，最短边至少15px，最长边最大4096px,支持jjpg/jpeg/png/bmp格式，当image字段存在时url字段失效
+	 */
+	private String image;
+
+	/**
+	 * 图片完整URL，URL长度不超过1024字节，URL对应的图片base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/jpeg/png/bmp格式，当image字段存在时url字段失效，不支持https的图片链接
+	 */
+	private String url;
+
+	/**
+	 * 是否定位单字符位置，big：不定位单字符位置，默认值；small：定位单字符位置
+	 */
+	private String recognize_granularity;
+
+	/**
+	 * 识别语言类型，默认为CHN_ENG
+	 * 可选值包括：
+	 * - CHN_ENG：中英文混合
+	 * - ENG：英文
+	 * - JAP：日语
+	 * - KOR：韩语
+	 * - FRE：法语
+	 * - SPA：西班牙语
+	 * - POR：葡萄牙语
+	 * - GER：德语
+	 * - ITA：意大利语
+	 * - RUS：俄语
+	 */
+	private String language_type;
+
+	/**
+	 * 是否检测图像朝向，默认不检测，即：false。朝向是指输入图像是正常方向、逆时针旋转90/180/270度。可选值包括:
+	 * - true：检测朝向；
+	 * - false：不检测朝向。
+	 */
+	private Boolean detect_direction;
+
+	/**
+	 * 是否检测语言，默认不检测。当前支持（中文、英语、日语、韩语）
+	 */
+	private Boolean detect_language;
+
+	/**
+	 * 是否输出段落信息
+	 */
+	private Boolean paragraph;
+
+	/**
+	 * 是否返回文字外接多边形顶点位置，不支持单字位置。默认为false
+	 */
+	private Boolean vertexes_location;
+
+	/**
+	 * 是否返回识别结果中每一行的置信度
+	 */
+	private Boolean probability;
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getRecognize_granularity() {
+		return recognize_granularity;
+	}
+
+	public void setRecognize_granularity(String recognize_granularity) {
+		this.recognize_granularity = recognize_granularity;
+	}
+
+	public String getLanguage_type() {
+		return language_type;
+	}
+
+	public void setLanguage_type(String language_type) {
+		this.language_type = language_type;
+	}
+
+	public Boolean getDetect_direction() {
+		return detect_direction;
+	}
+
+	public void setDetect_direction(Boolean detect_direction) {
+		this.detect_direction = detect_direction;
+	}
+
+	public Boolean getDetect_language() {
+		return detect_language;
+	}
+
+	public void setDetect_language(Boolean detect_language) {
+		this.detect_language = detect_language;
+	}
+
+	public Boolean getParagraph() {
+		return paragraph;
+	}
+
+	public void setParagraph(Boolean paragraph) {
+		this.paragraph = paragraph;
+	}
+
+	public Boolean getVertexes_location() {
+		return vertexes_location;
+	}
+
+	public void setVertexes_location(Boolean vertexes_location) {
+		this.vertexes_location = vertexes_location;
+	}
+
+	public Boolean getProbability() {
+		return probability;
+	}
+
+	public void setProbability(Boolean probability) {
+		this.probability = probability;
+	}
+}
