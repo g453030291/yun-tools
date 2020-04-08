@@ -156,6 +156,16 @@ public class GeneralResult {
 			public void setHeight(int height) {
 				this.height = height;
 			}
+
+			@Override
+			public String toString() {
+				return "Location{" +
+						"left=" + left +
+						", top=" + top +
+						", width=" + width +
+						", height=" + height +
+						'}';
+			}
 		}
 
 		public static class LocationChar{
@@ -182,7 +192,34 @@ public class GeneralResult {
 			public void setCharss(String charss) {
 				this.charss = charss;
 			}
+
+			@Override
+			public String toString() {
+				return "LocationChar{" +
+						"location=" + location +
+						", charss='" + charss + '\'' +
+						'}';
+			}
+		}
+
+		@Override
+		public String toString() {
+			return "WordsResult{" +
+					"location=" + location +
+					", words='" + words + '\'' +
+					", chars=" + chars +
+					'}';
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "GeneralResult{" +
+				"log_id='" + log_id + '\'' +
+				", direction=" + direction +
+				", words_result_num=" + words_result_num +
+				", words_result=" + words_result +
+				", probability=" + probability +
+				'}';
+	}
 }

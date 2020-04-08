@@ -15,12 +15,12 @@ import java.util.List;
 public class JsonUtil {
 
 	private static final Gson gson = new GsonBuilder()
-													.excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC)
-													.serializeNulls()
-													.setLongSerializationPolicy(LongSerializationPolicy.STRING)
-													.setDateFormat("yyyy-MM-dd HH:mm:ss")
-													.disableHtmlEscaping()
-													.create();
+								.excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC)
+								.serializeNulls()
+								.setLongSerializationPolicy(LongSerializationPolicy.STRING)
+								.setDateFormat("yyyy-MM-dd HH:mm:ss")
+								.disableHtmlEscaping()
+								.create();
 
 	private static final JsonParser jsonParser = new JsonParser();
 
@@ -60,6 +60,10 @@ public class JsonUtil {
 
 	public static Object fromJsonString(String json,Type type) {
 		return gson.fromJson(json, type);
+	}
+
+	public static <T> T formJsonString(String json,Class<T> clazz){
+		return gson.fromJson(json,(Type) clazz);
 	}
 
 	public static Object fromJsonString(Reader reader,Type type){
