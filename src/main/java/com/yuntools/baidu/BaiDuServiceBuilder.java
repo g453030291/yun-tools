@@ -15,9 +15,13 @@ public class BaiDuServiceBuilder {
 
 	private String clientSecret;
 
-	private BaiDuService baiDuService = null;
+	private BaiDuService baiDuService;
 
-	private BaiDuBaseData baiDuBaseData = null;
+	private BaiDuCardService baiDuCardService;
+
+	private BaiDuInvoiceService baiDuInvoiceService;
+
+	private BaiDuBaseData baiDuBaseData;
 
 	public BaiDuServiceBuilder setClientId(String clientId){
 		this.clientId = clientId;
@@ -41,10 +45,22 @@ public class BaiDuServiceBuilder {
 		return accessToken.getAccess_token();
 	}
 
-	public BaiDuService build(){
+	public BaiDuService buildOcrService(){
 		baiDuBaseData = new BaiDuBaseData(clientId,clientSecret,getAccessToken(clientId,clientSecret));
 		baiDuService = new BaiDuService(baiDuBaseData);
 		return baiDuService;
+	}
+
+	public BaiDuCardService buildCardServie(){
+		baiDuBaseData = new BaiDuBaseData(clientId,clientSecret,getAccessToken(clientId,clientSecret));
+		baiDuCardService = new BaiDuCardService(baiDuBaseData);
+		return baiDuCardService;
+	}
+
+	public BaiDuCardService buildInvoiceServie(){
+		baiDuBaseData = new BaiDuBaseData(clientId,clientSecret,getAccessToken(clientId,clientSecret));
+		baiDuInvoiceService = new BaiDuInvoiceService(baiDuBaseData);
+		return baiDuCardService;
 	}
 
 }
