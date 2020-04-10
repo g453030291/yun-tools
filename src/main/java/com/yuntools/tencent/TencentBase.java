@@ -1,8 +1,9 @@
-package com.yuntools.baidu;
+package com.yuntools.tencent;
 
+import com.yuntools.baidu.BaiDuBaseData;
 import com.yuntools.util.PropertiesUtil;
 
-public class BaiDuBase {
+public class TencentBase {
 
 	/************************** ocr *************************************/
 	/**
@@ -202,7 +203,7 @@ public class BaiDuBase {
 	 * 构建service类必传的参数
 	 * @param baiDuBaseData
 	 */
-	public BaiDuBase(BaiDuBaseData baiDuBaseData) {
+	public TencentBase(BaiDuBaseData baiDuBaseData) {
 		this.baiDuBaseData = baiDuBaseData;
 	}
 

@@ -3,6 +3,7 @@ package com.yuntools;
 import com.yuntools.baidu.BaiDuService;
 import com.yuntools.baidu.BaiDuServiceBuilder;
 import com.yuntools.entity.BaiDuWords;
+import com.yuntools.tencent.TencentServiceBuilder;
 
 public class App 
 {
@@ -14,7 +15,11 @@ public class App
         BaiDuService baiDuService = new BaiDuServiceBuilder()
                 .setClientId("rKfTmnrkk6VuFGDwn1MrdMuk")
                 .setClientSecret("zp9WeGF6oeNg2XyQeBhG6EeihTKyqw8H")
-                .build();
+                .buildOcrService();
         System.out.println(baiDuService.generalWords(baiduWords));
+        //AKIDTjiQvCTxsXv2uTjoKaZIxLksoUt8l3lC
+        //        PYQ2qQjlfIfneV7UcV8VdVO8cQzJNAyL
+        TencentServiceBuilder()
+
     }
 }

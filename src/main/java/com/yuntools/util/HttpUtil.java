@@ -73,4 +73,30 @@ public class HttpUtil {
 		return null;
 	}
 
+	public static String postRequest(String url,Map<String,String> map,Map<String,String> header) {
+		if(StringUtil.isEmpty(url) || map == null || map.isEmpty()){
+			throw new NullPointerException("url 或 map 为空");
+		}
+		FormBody.Builder builder = new FormBody.Builder();
+		for (Map.Entry<String,String> entry : map.entrySet()){
+			builder.add(entry.getKey(),entry.getValue());
+		}
+		Headers.Builder headers = new Headers.Builder();
+		headers.add("","");
+
+
+		RequestBody requestBody = builder.build();
+		Request request = new Request.Builder()
+				.url(url)
+				.headers(headers)
+				.post(requestBody)
+				.build();
+		try (Response response = CLIENT.newCall(request).execute()){
+			return response.body().string();
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
