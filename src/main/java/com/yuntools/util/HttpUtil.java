@@ -82,13 +82,14 @@ public class HttpUtil {
 			builder.add(entry.getKey(),entry.getValue());
 		}
 		Headers.Builder headers = new Headers.Builder();
-		headers.add("","");
-
-
+		for (Map.Entry<String,String> entry : map.entrySet()){
+			headers.add(entry.getKey(),entry.getValue());
+		}
+		Headers headerss = headers.build();
 		RequestBody requestBody = builder.build();
 		Request request = new Request.Builder()
 				.url(url)
-				.headers(headers)
+				.headers(headerss)
 				.post(requestBody)
 				.build();
 		try (Response response = CLIENT.newCall(request).execute()){
