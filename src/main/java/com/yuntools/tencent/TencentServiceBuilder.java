@@ -18,9 +18,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * tencent 文字识别
@@ -49,8 +47,8 @@ public class TencentServiceBuilder {
 	}
 
 	private final static Charset UTF8 = StandardCharsets.UTF_8;
-	private final static String SECRET_ID = "AKIDz8krbsJ5yKBZQpn74WFkmLPx3EXAMPLE";
-	private final static String SECRET_KEY = "Gu5t9xGARNpq86cd98joQYCN3EXAMPLE";
+	private final static String SECRET_ID = "";
+	private final static String SECRET_KEY = "";
 	private final static String CT_JSON = "application/json; charset=utf-8";
 
 	public static byte[] hmac256(byte[] key, String msg) throws Exception {
@@ -66,8 +64,8 @@ public class TencentServiceBuilder {
 		return DatatypeConverter.printHexBinary(d).toLowerCase();
 	}
 
-	private String getAccessToken(String clientId,String clientSecret) throws Exception {
-		//String getAccessTokenUrl = PropertiesUtil.getPropertiesValue("tencent.cvm.url");
+	private static String getAccessToken(String clientId, String clientSecret) throws Exception {
+		String getAccessTokenUrl = PropertiesUtil.getPropertiesValue("tencent.cvm.url");
 		String service = "cvm";
 		String host = "cvm.tencentcloudapi.com";
 		String region = "ap-guangzhou";
@@ -89,6 +87,9 @@ public class TencentServiceBuilder {
 		String signedHeaders = "content-type;host";
 
 		String payload = "{\"Limit\": 1, \"Filters\": [{\"Values\": [\"\\u672a\\u547d\\u540d\"], \"Name\": \"instance-name\"}]}";
+		Map<String,String> map = new HashMap<>();
+		map.put("Limit","1");
+		map.put("Filters","[{\"Values\": [\"\\u672a\\u547d\\u540d\"], \"Name\": \"instance-name\"}]");
 		String hashedRequestPayload = sha256Hex(payload);
 		String canonicalRequest = httpRequestMethod + "\n" + canonicalUri + "\n" + canonicalQueryString + "\n"
 				+ canonicalHeaders + "\n" + signedHeaders + "\n" + hashedRequestPayload;
@@ -121,6 +122,10 @@ public class TencentServiceBuilder {
 		headers.put("X-TC-Version", version);
 		headers.put("X-TC-Region", region);
 
+		String result = HttpUtil.postRequest(getAccessTokenUrl,map,headers);
+		System.out.println("result--------------------------");
+		System.out.println(result);
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("curl -X POST https://").append(host)
 				.append(" -H \"Authorization: ").append(authorization).append("\"")
@@ -133,6 +138,10 @@ public class TencentServiceBuilder {
 				.append(" -d '").append(payload).append("'");
 		System.out.println(sb.toString());
 		return null;
+	}
+
+	public static void main(String[] args) throws Exception {
+		getAccessToken(null,null);
 	}
 
 //	public BaiDuService buildOcrService(){

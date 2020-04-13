@@ -82,8 +82,8 @@ public class HttpUtil {
 			builder.add(entry.getKey(),entry.getValue());
 		}
 		Headers.Builder headers = new Headers.Builder();
-		for (Map.Entry<String,String> entry : map.entrySet()){
-			headers.add(entry.getKey(),entry.getValue());
+		for (Map.Entry<String,String> head : header.entrySet()){
+			headers.add(head.getKey(),head.getValue());
 		}
 		Headers headerss = headers.build();
 		RequestBody requestBody = builder.build();
