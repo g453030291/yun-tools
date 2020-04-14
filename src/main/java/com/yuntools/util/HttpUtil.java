@@ -1,6 +1,9 @@
 package com.yuntools.util;
 
 import okhttp3.*;
+import okio.BufferedSink;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Map;
@@ -81,15 +84,39 @@ public class HttpUtil {
 		for (Map.Entry<String,String> entry : map.entrySet()){
 			builder.add(entry.getKey(),entry.getValue());
 		}
+		RequestBody requestBody = builder.build();
+
 		Headers.Builder headers = new Headers.Builder();
 		for (Map.Entry<String,String> head : header.entrySet()){
 			headers.add(head.getKey(),head.getValue());
 		}
 		Headers headerss = headers.build();
-		RequestBody requestBody = builder.build();
 		Request request = new Request.Builder()
 				.url(url)
 				.headers(headerss)
+				.post(requestBody)
+				.build();
+		try (Response response = CLIENT.newCall(request).execute()){
+			return response.body().string();
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * json格式数据的post请求
+	 * @param url
+	 * @param json
+	 * @return
+	 */
+	public static String postJsonRequest(String url,String json) {
+		if(StringUtil.isEmpty(url) || StringUtil.isEmpty(json)){
+			throw new NullPointerException("url 或 json 为空");
+		}
+		RequestBody requestBody = RequestBody.create(json,JSON);
+		Request request = new Request.Builder()
+				.url(url)
 				.post(requestBody)
 				.build();
 		try (Response response = CLIENT.newCall(request).execute()){

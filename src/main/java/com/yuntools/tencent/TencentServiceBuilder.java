@@ -115,7 +115,7 @@ public class TencentServiceBuilder {
 
 		TreeMap<String, String> headers = new TreeMap<String, String>();
 		headers.put("Authorization", authorization);
-		headers.put("Content-Type", CT_JSON);
+		headers.put("Content-Type", "application/json; charset=utf-8");
 		headers.put("Host", host);
 		headers.put("X-TC-Action", action);
 		headers.put("X-TC-Timestamp", timestamp);
