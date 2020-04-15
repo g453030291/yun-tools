@@ -6,42 +6,62 @@ package com.yuntools.huawei;
  */
 public class HuaweiBaseData {
 
-	private String secretId;
+	/**
+	 * IAM用户名
+	 */
+	private String name;
 
-	private String secretKey;
+	/**
+	 * 登录密码
+	 */
+	private String password;
 
-	private String accessToken;
+	/**
+	 * 账号名
+	 */
+	private String domainName;
+
+	private String token;
 
 	public HuaweiBaseData() {
 	}
 
-	public HuaweiBaseData(String secretId, String secretKey, String accessToken) {
-		this.secretId = secretId;
-		this.secretKey = secretKey;
-		this.accessToken = accessToken;
+	public HuaweiBaseData(String name, String password, String domainName, String token) {
+		this.name = name;
+		this.password = password;
+		this.domainName = domainName;
+		this.token = token;
 	}
 
-	public String getSecretId() {
-		return secretId;
+	public String getName() {
+		return name;
 	}
 
-	public void setSecretId(String secretId) {
-		this.secretId = secretId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getSecretKey() {
-		return secretKey;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSecretKey(String secretKey) {
-		this.secretKey = secretKey;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getAccessToken() {
-		return accessToken;
+	public String getDomainName() {
+		return domainName;
 	}
 
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 }
