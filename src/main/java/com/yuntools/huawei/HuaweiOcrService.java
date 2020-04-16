@@ -1,8 +1,12 @@
 package com.yuntools.huawei;
 
+import com.yuntools.entity.ResponseData;
 import com.yuntools.util.HttpUtil;
+import com.yuntools.util.JsonUtil;
 import com.yuntools.util.StringUtil;
+import okhttp3.Response;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,13 +25,15 @@ public class HuaweiOcrService extends HuaweiBase{
 		super(huaweiBaseData);
 	}
 
-	public String generalText(String image){
+	public String generalText(String image) throws IOException {
 		if(StringUtil.isEmpty(image)){
 			throw new NullPointerException("图片参数不能为空");
 		}
 		Map<String,String> map = new HashMap<>(1);
 		map.put("image",image);
-
-		return result;
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(GENERAL_TEXT_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
 	}
 }

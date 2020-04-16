@@ -4,9 +4,12 @@ import com.yuntools.baidu.BaiDuBaseData;
 import com.yuntools.baidu.BaiDuService;
 import com.yuntools.entity.Domain;
 import com.yuntools.entity.HuaweiAuth;
+import com.yuntools.entity.ResponseData;
 import com.yuntools.util.HttpUtil;
 import com.yuntools.util.JsonUtil;
 import com.yuntools.util.PropertiesUtil;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 import java.util.*;
 
@@ -66,6 +69,7 @@ public class HuaweiServiceBuilder {
 	 * postman示例:https://support.huaweicloud.com/iam_faq/iam_01_034.html
 	 * 华为接口认证的两种模式:1.token;2.AK/SK;
 	 * 详细介绍:https://support.huaweicloud.com/api-ocr/ocr_03_0005.html
+	 * 坑!返回的response里根本没有生成的token,token在返回头X-Subject-Token字段中取出
 	 * @throws Exception
 	 */
 	private static String getAccessToken(String name, String password,String domainName) throws Exception {
@@ -96,10 +100,8 @@ public class HuaweiServiceBuilder {
 		identity_scope.setScope(scope);
 		auth.setAuth(identity_scope);
 		String json = JsonUtil.toJsonString(auth);
-		String result = HttpUtil.postJsonRequest(authTokenUrl,json);
-		System.out.println(json);
-		System.out.println(result);
-		return null;
+		ResponseData responseData = HttpUtil.postJsonRequest(authTokenUrl,null,json);
+		return responseData.getHeaders().get("X-Subject-Token").toString();
 	}
 
 	public HuaweiOcrService buildHuaweiService() throws Exception {

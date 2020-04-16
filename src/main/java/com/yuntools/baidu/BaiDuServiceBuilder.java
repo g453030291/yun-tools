@@ -41,7 +41,7 @@ public class BaiDuServiceBuilder {
 				+ "&client_id=" + clientId
 				// 3. 官网获取的 Secret Key
 				+ "&client_secret=" + clientSecret;
-		AccessToken accessToken = (AccessToken) JsonUtil.fromJsonString(HttpUtil.getRequest(getAccessTokenUrl), AccessToken.class);
+		AccessToken accessToken = JsonUtil.fromJsonString(HttpUtil.getRequest(getAccessTokenUrl), AccessToken.class);
 		return accessToken.getAccess_token();
 	}
 

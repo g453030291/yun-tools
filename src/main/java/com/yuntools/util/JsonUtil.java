@@ -58,12 +58,8 @@ public class JsonUtil {
 		return gson.fromJson(json, Object.class);
 	}
 
-	public static Object fromJsonString(String json,Type type) {
-		return gson.fromJson(json, type);
-	}
-
-	public static <T> T formJsonString(String json,Class<T> clazz){
-		return gson.fromJson(json,(Type) clazz);
+	public static <T> T fromJsonString(String json,Class<T> tClass) {
+		return gson.fromJson(json, tClass);
 	}
 
 	public static Object fromJsonString(Reader reader,Type type){

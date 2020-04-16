@@ -8,7 +8,7 @@ public class HuaweiBase {
 	/**
 	 * 通用文字识别
 	 */
-	protected static final String GENERAL_BASIC_URL = PropertiesUtil.getPropertiesValue("baidu.general.basic.url");
+	protected static final String GENERAL_TEXT_URL = PropertiesUtil.getPropertiesValue("huawei.general.text.url");
 
 	protected HuaweiBaseData huaweiBaseData;
 

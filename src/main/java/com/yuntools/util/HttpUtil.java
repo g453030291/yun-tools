@@ -1,11 +1,13 @@
 package com.yuntools.util;
 
+import com.yuntools.entity.ResponseData;
 import okhttp3.*;
 import okio.BufferedSink;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -76,7 +78,7 @@ public class HttpUtil {
 		return null;
 	}
 
-	public static String postRequest(String url,Map<String,String> map,Map<String,String> header) {
+	public static ResponseBody postRequest(String url,Map<String,String> map,Map<String,String> header) {
 		if(StringUtil.isEmpty(url) || map == null || map.isEmpty()){
 			throw new NullPointerException("url 或 map 为空");
 		}
@@ -97,7 +99,7 @@ public class HttpUtil {
 				.post(requestBody)
 				.build();
 		try (Response response = CLIENT.newCall(request).execute()){
-			return response.body().string();
+			return response.body();
 		}catch (IOException e){
 			e.printStackTrace();
 		}
@@ -110,17 +112,31 @@ public class HttpUtil {
 	 * @param json
 	 * @return
 	 */
-	public static String postJsonRequest(String url,String json) {
+	public static ResponseData postJsonRequest(String url,Map<String,String> header,String json) {
 		if(StringUtil.isEmpty(url) || StringUtil.isEmpty(json)){
 			throw new NullPointerException("url 或 json 为空");
 		}
+		Headers.Builder headers = new Headers.Builder();
+		for (Map.Entry<String,String> head : header.entrySet()){
+			headers.add(head.getKey(),head.getValue());
+		}
+		Headers headerss = headers.build();
 		RequestBody requestBody = RequestBody.create(json,JSON);
 		Request request = new Request.Builder()
 				.url(url)
+				.headers(headerss)
 				.post(requestBody)
 				.build();
 		try (Response response = CLIENT.newCall(request).execute()){
-			return response.body().string();
+			Headers headersss = response.headers();
+			Map<String,Object> map = new HashMap<>(headersss.size());
+			for(int i = 0;i < headersss.size();i++){
+				map.put(headersss.name(i),headersss.value(i));
+			}
+			ResponseData data = new ResponseData();
+			data.setHeaders(map);
+			data.setResponseBody(response.body().string());
+			return data;
 		}catch (IOException e){
 			e.printStackTrace();
 		}
