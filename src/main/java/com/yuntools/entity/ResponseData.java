@@ -27,4 +27,12 @@ public class ResponseData {
 	public void setResponseBody(String responseBody) {
 		this.responseBody = responseBody;
 	}
+
+	@Override
+	public String toString() {
+		return "ResponseData{" +
+				"headers=" + headers +
+				", responseBody='" + responseBody + '\'' +
+				'}';
+	}
 }

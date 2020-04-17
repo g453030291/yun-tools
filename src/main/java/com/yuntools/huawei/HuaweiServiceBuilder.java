@@ -70,6 +70,8 @@ public class HuaweiServiceBuilder {
 	 * 华为接口认证的两种模式:1.token;2.AK/SK;
 	 * 详细介绍:https://support.huaweicloud.com/api-ocr/ocr_03_0005.html
 	 * 坑!返回的response里根本没有生成的token,token在返回头X-Subject-Token字段中取出
+	 * service接口中返回的状态码释义:https://support.huaweicloud.com/api-ocr/ocr_03_0090.html
+	 * endpoint查询!!!https://developer.huaweicloud.com/endpoint
 	 * @throws Exception
 	 */
 	private static String getAccessToken(String name, String password,String domainName) throws Exception {
@@ -101,6 +103,7 @@ public class HuaweiServiceBuilder {
 		auth.setAuth(identity_scope);
 		String json = JsonUtil.toJsonString(auth);
 		ResponseData responseData = HttpUtil.postJsonRequest(authTokenUrl,null,json);
+		System.out.println(responseData.toString());
 		return responseData.getHeaders().get("X-Subject-Token").toString();
 	}
 

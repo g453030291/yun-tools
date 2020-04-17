@@ -116,17 +116,29 @@ public class HttpUtil {
 		if(StringUtil.isEmpty(url) || StringUtil.isEmpty(json)){
 			throw new NullPointerException("url 或 json 为空");
 		}
-		Headers.Builder headers = new Headers.Builder();
-		for (Map.Entry<String,String> head : header.entrySet()){
-			headers.add(head.getKey(),head.getValue());
+		Headers headerss = null;
+		if(header != null && !header.isEmpty()){
+			Headers.Builder headers = new Headers.Builder();
+			for (Map.Entry<String,String> head : header.entrySet()){
+				headers.add(head.getKey(),head.getValue());
+			}
+			headerss = headers.build();
 		}
-		Headers headerss = headers.build();
 		RequestBody requestBody = RequestBody.create(json,JSON);
-		Request request = new Request.Builder()
-				.url(url)
-				.headers(headerss)
-				.post(requestBody)
-				.build();
+		Request request = null;
+		if(headerss == null){
+			request = new Request.Builder()
+					.url(url)
+					.post(requestBody)
+					.build();
+		}else{
+			request = new Request.Builder()
+					.url(url)
+					.headers(headerss)
+					.post(requestBody)
+					.build();
+		}
+
 		try (Response response = CLIENT.newCall(request).execute()){
 			Headers headersss = response.headers();
 			Map<String,Object> map = new HashMap<>(headersss.size());
