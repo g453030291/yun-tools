@@ -14,7 +14,7 @@ import okhttp3.ResponseBody;
 import java.util.*;
 
 /**
- * tencent 文字识别
+ * huawei 文字识别
  * @author mantou
  */
 public class HuaweiServiceBuilder {
@@ -103,7 +103,7 @@ public class HuaweiServiceBuilder {
 		auth.setAuth(identity_scope);
 		String json = JsonUtil.toJsonString(auth);
 		ResponseData responseData = HttpUtil.postJsonRequest(authTokenUrl,null,json);
-		System.out.println(responseData.toString());
+		System.out.println("token:"+responseData.toString());
 		return responseData.getHeaders().get("X-Subject-Token").toString();
 	}
 

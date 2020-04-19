@@ -138,7 +138,6 @@ public class HttpUtil {
 					.post(requestBody)
 					.build();
 		}
-
 		try (Response response = CLIENT.newCall(request).execute()){
 			Headers headersss = response.headers();
 			Map<String,Object> map = new HashMap<>(headersss.size());
