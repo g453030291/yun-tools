@@ -72,6 +72,7 @@ public class HuaweiServiceBuilder {
 	 * 坑!返回的response里根本没有生成的token,token在返回头X-Subject-Token字段中取出
 	 * service接口中返回的状态码释义:https://support.huaweicloud.com/api-ocr/ocr_03_0090.html
 	 * endpoint查询!!!https://developer.huaweicloud.com/endpoint
+	 * 深坑!project下必须填写"name": "cn-north-1"否则会报0203错误.
 	 * @throws Exception
 	 */
 	private static String getAccessToken(String name, String password,String domainName) throws Exception {
@@ -86,8 +87,10 @@ public class HuaweiServiceBuilder {
 		Domain domain = new Domain();
 		domain.setName(domainName);
 		HuaweiAuth.Identity_scope.Identity identity = new HuaweiAuth.Identity_scope.Identity();
+		HuaweiAuth.Identity_scope.Scope.Project project = new HuaweiAuth.Identity_scope.Scope.Project();
+		project.setName("cn-north-1");
 		HuaweiAuth.Identity_scope.Scope scope = new HuaweiAuth.Identity_scope.Scope();
-		scope.setDomain(domain);
+		scope.setProject(project);
 		identity.setMethods(Arrays.asList("password"));
 		HuaweiAuth.Identity_scope.Identity.Password password1 = new HuaweiAuth.Identity_scope.Identity.Password();
 		HuaweiAuth.Identity_scope.Identity.Password.User user = new HuaweiAuth.Identity_scope.Identity.Password.User();
@@ -102,6 +105,7 @@ public class HuaweiServiceBuilder {
 		identity_scope.setScope(scope);
 		auth.setAuth(identity_scope);
 		String json = JsonUtil.toJsonString(auth);
+		System.out.println(json);
 		ResponseData responseData = HttpUtil.postJsonRequest(authTokenUrl,null,json);
 		System.out.println("token:"+responseData.toString());
 		return responseData.getHeaders().get("X-Subject-Token").toString();
@@ -112,10 +116,7 @@ public class HuaweiServiceBuilder {
 		HuaweiBaseData data = new HuaweiBaseData(name,password,domainName,token);
 		return new HuaweiOcrService(data);
 	}
-//	public BaiDuService buildOcrService(){
-//		baiDuBaseData = new BaiDuBaseData(clientId,clientSecret,getAccessToken(clientId,clientSecret));
-//		baiDuService = new BaiDuService(baiDuBaseData);
-//		return baiDuService;
-//	}
+
+
 
 }

@@ -25,15 +25,42 @@ public class HuaweiOcrService extends HuaweiBase{
 		super(huaweiBaseData);
 	}
 
-	public String generalText(String image) throws IOException {
-		if(StringUtil.isEmpty(image)){
-			throw new NullPointerException("图片参数不能为空");
-		}
+	/**
+	 * 通用文字识别
+	 * image和ur必须传一个,如果都传,默认识别image
+	 * @param image 图片base64编码
+	 * @param url 图片url地址
+	 * @return
+	 * @throws IOException
+	 */
+	public String generalText(String image,String url) throws IOException {
 		Map<String,String> map = new HashMap<>(1);
-		map.put("image",image);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
 		Map<String,String> header = new HashMap<>(1);
 		header.put("X-Auth-Token",huaweiBaseData.getToken());
 		ResponseData responseData = HttpUtil.postJsonRequest(GENERAL_TEXT_URL,header,JsonUtil.toJsonString(map));
 		return responseData.getResponseBody();
 	}
+
+	public String generalTable(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(GENERAL_TEXT_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
 }

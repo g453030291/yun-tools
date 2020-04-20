@@ -109,14 +109,26 @@ public class HuaweiAuth {
 		}
 
 		public static class Scope{
-			private Domain domain;
+			private Project project;
 
-			public Domain getDomain() {
-				return domain;
+			public Project getProject() {
+				return project;
 			}
 
-			public void setDomain(Domain domain) {
-				this.domain = domain;
+			public void setProject(Project project) {
+				this.project = project;
+			}
+
+			public static class Project{
+				private String name;
+
+				public String getName() {
+					return name;
+				}
+
+				public void setName(String name) {
+					this.name = name;
+				}
 			}
 		}
 	}
