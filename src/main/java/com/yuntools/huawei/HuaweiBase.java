@@ -30,6 +30,38 @@ public class HuaweiBase {
 	 */
 	protected static final String HAND_WRITING_URL = PropertiesUtil.getPropertiesValue("huawei.hand.writing.url");
 
+	/**
+	 * 身份证识别
+	 */
+	protected static final String ID_CARD_URL = PropertiesUtil.getPropertiesValue("huawei.id.card.url");
+
+	/**
+	 * 行驶证识别
+	 */
+	protected static final String VEHICLE_LICENSE_URL = PropertiesUtil.getPropertiesValue("huawei.vehicle.license.url");
+
+	/**
+	 * 驾驶证识别
+	 */
+	protected static final String DRIVER_LICENSE_URL = PropertiesUtil.getPropertiesValue("huawei.vehicle.license.url");
+
+	/**
+	 * 护照识别
+	 */
+	protected static final String PASSPORT_URL = PropertiesUtil.getPropertiesValue("huawei.passport.url");
+
+	/**
+	 * 银行卡识别
+	 */
+	protected static final String BANKCARD_URL = PropertiesUtil.getPropertiesValue("huawei.bankcard.url");
+
+	/**
+	 * 营业执照识别
+	 */
+	protected static final String BUSINESS_LICENSE_URL = PropertiesUtil.getPropertiesValue("huawei.bankcard.url");
+
+
+
 	protected HuaweiBaseData huaweiBaseData;
 
 	/**

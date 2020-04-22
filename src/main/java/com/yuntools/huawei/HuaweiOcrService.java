@@ -43,7 +43,7 @@ public class HuaweiOcrService extends HuaweiBase{
 	 * @throws IOException
 	 */
 	public String generalText(String image,String url,Boolean detect_direction,Boolean quick_mode) throws IOException {
-		Map<String,String> map = new HashMap<>(1);
+		Map<String,String> map = new HashMap<>(3);
 		if(!StringUtil.isEmpty(image)){
 			map.put("image",image);
 		}else if(!StringUtil.isEmpty(url)){
@@ -76,7 +76,7 @@ public class HuaweiOcrService extends HuaweiBase{
 	 * @throws IOException
 	 */
 	public String generalTable(String image,String url,Boolean return_confidence) throws IOException {
-		Map<String,String> map = new HashMap<>(1);
+		Map<String,String> map = new HashMap<>(2);
 		if(!StringUtil.isEmpty(image)){
 			map.put("image",image);
 		}else if(!StringUtil.isEmpty(url)){
@@ -94,7 +94,7 @@ public class HuaweiOcrService extends HuaweiBase{
 	}
 
 	public String webImage(String image, String url, Boolean detect_direction,List<String> extract_type) throws IOException {
-		Map<String,Object> map = new HashMap<>(1);
+		Map<String,Object> map = new HashMap<>(4);
 		if(!StringUtil.isEmpty(image)){
 			map.put("image",image);
 		}else if(!StringUtil.isEmpty(url)){
@@ -141,7 +141,7 @@ public class HuaweiOcrService extends HuaweiBase{
 	 * @throws IOException
 	 */
 	public String invoice(String image, String url,List<String> type_list) throws IOException {
-		Map<String,Object> map = new HashMap<>(1);
+		Map<String,Object> map = new HashMap<>(2);
 		if(!StringUtil.isEmpty(image)){
 			map.put("image",image);
 		}else if(!StringUtil.isEmpty(url)){
@@ -178,7 +178,7 @@ public class HuaweiOcrService extends HuaweiBase{
 	 * @throws IOException
 	 */
 	public String handWriting(String image, String url,Boolean quick_mode,String char_set,String detect_direction,String extract_type) throws IOException {
-		Map<String,Object> map = new HashMap<>(1);
+		Map<String,Object> map = new HashMap<>(2);
 		if(!StringUtil.isEmpty(image)){
 			map.put("image",image);
 		}else if(!StringUtil.isEmpty(url)){
@@ -201,6 +201,142 @@ public class HuaweiOcrService extends HuaweiBase{
 		Map<String,String> header = new HashMap<>(1);
 		header.put("X-Auth-Token",huaweiBaseData.getToken());
 		ResponseData responseData = HttpUtil.postJsonRequest(HAND_WRITING_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 身份证识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。图片最小边不小于15像素，最长边不超过8000像素。支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @param side front：身份证人像面
+	 * back：身份证国徽面
+	 * 如果参数值为空或无该参数，系统自动识别，建议填写，准确率更高。
+	 * @return
+	 * @throws IOException
+	 */
+	public String idCard(String image,String url,String side) throws IOException {
+		Map<String,String> map = new HashMap<>(2);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		if(!StringUtil.isEmpty(side)){
+			map.put("side",side);
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(ID_CARD_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 行驶证识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。图片最小边不小于100像素，最长边不超过8000像素。支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @param side front: 行驶证主页
+	 * back: 行驶证副页
+	 * 如果参数值为空或无该参数，系统默认识别主页，建议填写，准确率更高。
+	 * @return
+	 * @throws IOException
+	 */
+	public String vehicleLicense(String image,String url,String side) throws IOException {
+		Map<String,String> map = new HashMap<>(2);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		if(!StringUtil.isEmpty(side)){
+			map.put("side",side);
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(VEHICLE_LICENSE_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 驾驶证识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。图片最小边不小于100像素，最长边不超过8000像素。支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @param side front: 驾驶证主页
+	 * back: 驾驶证副页
+	 * 如果参数值为空或无该参数，系统默认识别主页，建议填写，准确率更高。
+	 * @return
+	 * @throws IOException
+	 */
+	public String driverLicense(String image,String url,String side) throws IOException {
+		Map<String,String> map = new HashMap<>(2);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		if(!StringUtil.isEmpty(side)){
+			map.put("side",side);
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(DRIVER_LICENSE_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 功能介绍
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。
+	 * 图片最小边不小于15像素，最长边不超过4096像素，支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @param country_code 输入值为护照颁发国的国家码，根据国家码选择对应的护照识别服务。
+	 * 若输入中未选此字段，服务会根据自己识别判断的护照类型匹配相应的护照识别服务。
+	 * 若选择值为GENERAL，则选择护照机器码识别。
+	 * 若选择值为CHN，则选择中国护照全字段识别。
+	 * @return
+	 * @throws IOException
+	 */
+	public String passport(String image,String url,String country_code) throws IOException {
+		Map<String,String> map = new HashMap<>(2);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		if(!StringUtil.isEmpty(country_code)){
+			map.put("country_code",country_code);
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(PASSPORT_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 银行卡识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。图片最小边不小于15像素，最长边不超过4096像素，支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String bankcard(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(BANKCARD_URL,header,JsonUtil.toJsonString(map));
 		return responseData.getResponseBody();
 	}
 
