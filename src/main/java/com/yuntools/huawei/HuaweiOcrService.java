@@ -340,5 +340,253 @@ public class HuaweiOcrService extends HuaweiBase{
 		return responseData.getResponseBody();
 	}
 
+	/**
+	 * 营业执照识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。
+	 * 图片最小边不小于15像素，最长边不超过8192像素，支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String businessLicense(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(BUSINESS_LICENSE_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 道路运输证识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。
+	 * 图片最小边不小于15像素，最长边不超过4096像素，支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String transportationLicense(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(TRANSPORTATION_LICENSE_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 车牌识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。图片最小边不小于15像素，最长边不超过4096像素，支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String licensePlate(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(LICENSE_PLATE_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 增值税发票识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。图片最小边不小于100像素，最长边不超过8192像素，支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String vatInvoice(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(VAT_INVOICE_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 机动车销售发票识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。图片最小边不小于100像素，最长边不超过8000像素。支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String mvsInvoice(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(MVS_INVOICE_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 出租车发票识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。
+	 * 图片最小边不小于15像素，最长边不超过4096像素，支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String taxiInvoice(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(TAXI_INVOICE_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 火车票识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。
+	 * 图片最小边不小于15像素，最长边不超过4096像素，支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String trainTicket(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(TRAIN_TICKET_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 定额发票识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。
+	 * 图片最小边不小于15像素，最长边不超过4096像素，支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String quotaInvoice(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(QUOTA_INVOICE_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 车辆通行费发票识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。
+	 * 图片最小边不小于15像素，最长边不超过4096像素，支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String tollInvoice(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(TOLL_INVOICE_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 飞机行程单识别
+	 * @param image 图像数据，base64编码，要求base64编码后大小不超过10MB。
+	 * 图片最小边不小于15像素，最长边不超过4096像素，支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String flightItinerary(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(FLIGHT_ITINERARY_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
+
+	/**
+	 * 英文海关单据识别
+	 * @param image 英文海关单据图片文件，经过Base64转换后的字符串。要求base64编码后大小不超过10MB，图片尺寸不小于1000*1200像素。支持JPEG/JPG/PNG/BMP/TIFF格式。
+	 * @param url 图片的URL路径，目前仅支持华为云上OBS提供的匿名公开授权访问的URL以及公网URL。
+	 * @return
+	 * @throws IOException
+	 */
+	public String ocrForm(String image,String url) throws IOException {
+		Map<String,String> map = new HashMap<>(1);
+		if(!StringUtil.isEmpty(image)){
+			map.put("image",image);
+		}else if(!StringUtil.isEmpty(url)){
+			map.put("url",url);
+		}else {
+			throw new NullPointerException("image 或 url不能为空");
+		}
+		Map<String,String> header = new HashMap<>(1);
+		header.put("X-Auth-Token",huaweiBaseData.getToken());
+		ResponseData responseData = HttpUtil.postJsonRequest(OCR_FORM_URL,header,JsonUtil.toJsonString(map));
+		return responseData.getResponseBody();
+	}
 
 }
