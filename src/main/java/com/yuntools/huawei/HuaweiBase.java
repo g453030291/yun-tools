@@ -110,10 +110,6 @@ public class HuaweiBase {
 	 */
 	protected static final String OCR_FORM_URL = PropertiesUtil.getPropertiesValue("huawei.ocr.form.url");
 
-
-
-
-
 	protected HuaweiBaseData huaweiBaseData;
 
 	/**

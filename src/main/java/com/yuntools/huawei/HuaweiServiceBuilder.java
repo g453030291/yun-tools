@@ -77,13 +77,6 @@ public class HuaweiServiceBuilder {
 	 */
 	private static String getAccessToken(String name, String password,String domainName) throws Exception {
 		String authTokenUrl = PropertiesUtil.getPropertiesValue("huawei.auth.tokens");
-		//其它
-		String url = "https://ocr.cn-north-4.myhuaweicloud.com";
-		//英文海关单据识别、手写文字识别
-		String url1 = "https://ocr.cn-north-1.myhuaweicloud.com";
-		//网络图片识别
-		String url2 = "https://ocr.cn-south-1.myhuaweicloud.com";
-
 		Domain domain = new Domain();
 		domain.setName(domainName);
 		HuaweiAuth.Identity_scope.Identity identity = new HuaweiAuth.Identity_scope.Identity();

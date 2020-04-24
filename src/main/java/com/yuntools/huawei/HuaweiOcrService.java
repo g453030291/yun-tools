@@ -4,7 +4,6 @@ import com.yuntools.entity.ResponseData;
 import com.yuntools.util.HttpUtil;
 import com.yuntools.util.JsonUtil;
 import com.yuntools.util.StringUtil;
-import okhttp3.Response;
 
 import java.io.IOException;
 import java.util.HashMap;
